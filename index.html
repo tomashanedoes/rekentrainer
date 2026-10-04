@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>RekenTrainer - Leer rekenen!</title>
+    <meta name="description" content="Gratis reken-app voor kinderen. Oefen optellen, aftrekken en tafels met adaptief leren.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-192.png">
+    <meta name="theme-color" content="#1e1b4b">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="RekenTrainer">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <!-- Load scripts in head with defer -->
+    <script src="levels.js" defer></script>
+    <script src="skills.js" defer></script>
+    <script src="practice-engine.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+<div id="app">
+
+    <!-- Profile Select Screen -->
+    <div id="profileSelectScreen" class="screen">
+        <h1>RekenTrainer</h1>
+        <p class="subtitle">Wie ben jij?</p>
+        
+        <div id="profileList" class="profile-list"></div>
+        
+        <div class="name-input-section">
+            <input id="nameInput" type="text" placeholder="Of typ je naam..." maxlength="20" autocomplete="off">
+            <button id="startBtn" class="btn-primary">Start!</button>
+        </div>
+        
+        <button id="importBtn" class="btn-link">📥 Ik heb een code</button>
+    </div>
+
+    <!-- Mode Select Screen (NEW) -->
+    <div id="modeSelectScreen" class="screen hidden">
+        <div class="mode-header">
+            <button id="modeBackBtn" class="btn-switch" title="Terug">👤</button>
+            <h2 id="modeWelcome"></h2>
+            <button id="modeBackupBtn" class="btn-switch" title="Backup">💾</button>
+        </div>
+        
+        <p class="subtitle">Wat wil je doen?</p>
+        
+        <div class="mode-options">
+            <button id="adventureModeBtn" class="mode-btn adventure">
+                <span class="mode-icon">🗺️</span>
+                <span class="mode-content">
+                    <span class="mode-title">Avontuur</span>
+                    <span class="mode-desc">Speel alle levels door</span>
+                </span>
+            </button>
+            
+            <button id="skillModeBtn" class="mode-btn skill">
+                <span class="mode-icon">🎯</span>
+                <span class="mode-content">
+                    <span class="mode-title">Onderwerp oefenen</span>
+                    <span class="mode-desc">Kies waar je beter in wilt worden</span>
+                </span>
+            </button>
+            
+            <button id="quickModeBtn" class="mode-btn quick">
+                <span class="mode-icon">⚡</span>
+                <span class="mode-content">
+                    <span class="mode-title">Snelle ronde</span>
+                    <span class="mode-desc">60 seconden, alles door elkaar</span>
+                </span>
+            </button>
+        </div>
+        
+        <div id="modeStats" class="mode-stats">
+            <div class="stat-item">
+                <span class="stat-value" id="totalStarsDisplay">0</span>
+                <span class="stat-label">sterren</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="levelsCompletedDisplay">0</span>
+                <span class="stat-label">levels</span>
+            </div>
+        </div>
+        
+        <div class="profile-switch-section">
+            <button id="switchUserBtn" class="btn-switch-user">
+                <span>👤</span> Wissel van speler
+            </button>
+            <button id="newUserBtn" class="btn-new-user">
+                <span>➕</span> Nieuwe speler
+            </button>
+        </div>
+    </div>
+
+    <!-- Skill Select Screen (NEW) -->
+    <div id="skillSelectScreen" class="screen hidden">
+        <div class="skill-header">
+            <button id="skillBackBtn" class="btn-back">← Terug</button>
+            <h2>Kies een onderwerp</h2>
+        </div>
+        
+        <div id="skillCategories" class="skill-categories"></div>
+    </div>
+
+    <!-- Level Select Screen (Adventure Mode) -->
+    <div id="levelSelectScreen" class="screen hidden">
+        <div class="level-header">
+            <button id="switchProfileBtn" class="btn-back">← Terug</button>
+            <h2 id="levelWelcome">Avontuur</h2>
+            <div></div>
+        </div>
+        
+        <div id="levelList" class="level-list"></div>
+    </div>
+
+    <!-- Code Screen (Import/Export) -->
+    <div id="codeScreen" class="screen hidden">
+        <h1>RekenTrainer</h1>
+        
+        <div id="codeImportSection" class="code-section">
+            <p class="subtitle">Code invoeren</p>
+            <p class="code-hint">Heb je een backup code? Plak hem hieronder:</p>
+            <textarea id="codeInput" placeholder="Plak hier je code..." rows="4"></textarea>
+            <button id="loadCodeBtn" class="btn-primary">Code laden</button>
+        </div>
+        
+        <div id="codeExportSection" class="code-section hidden">
+            <p class="subtitle">Backup code voor <span id="codeProfileName"></span></p>
+            <p class="code-hint">Bewaar deze code om de voortgang op een ander apparaat te laden:</p>
+            <div id="codeDisplay" class="code-display"></div>
+            <button id="copyCodeBtn" class="btn-primary">📋 Kopieer code</button>
+        </div>
+        
+        <div id="codeResult" class="code-result"></div>
+        <button id="closeCodeBtn" class="btn-secondary">← Terug</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game" class="screen hidden">
+        <div id="topbar">
+            <div id="score">⭐ 0</div>
+            <div id="levelTitle"></div>
+            <div id="questionCount">#0</div>
+            <div id="timer"></div>
+        </div>
+
+        <div id="progressBar" class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+        <div id="question">?</div>
+        
+        <!-- Hint area (NEW) -->
+        <div id="hintArea" class="hint-area hidden">
+            <div id="hintText" class="hint-text"></div>
+        </div>
+        
+        <div id="answerBox">?</div>
+
+        <div id="keypad">
+            <button data-num="1">1</button>
+            <button data-num="2">2</button>
+            <button data-num="3">3</button>
+            <button data-num="4">4</button>
+            <button data-num="5">5</button>
+            <button data-num="6">6</button>
+            <button data-num="7">7</button>
+            <button data-num="8">8</button>
+            <button data-num="9">9</button>
+            <button id="hintBtn" class="btn-hint">💡</button>
+            <button data-num="0">0</button>
+            <button id="okBtn" class="btn-ok">OK</button>
+        </div>
+
+        <div class="game-actions">
+            <button id="deleteBtn" class="btn-delete-wide">⌫ Wis</button>
+            <button id="backToLevelsBtn" class="btn-menu">← Stop</button>
+        </div>
+    </div>
+
+    <!-- End Session Modal (NEW) -->
+    <div id="endSessionModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="endSessionTitle">Ronde klaar!</h2>
+            <div id="endSessionStats" class="end-stats"></div>
+            <div id="endSessionStars" class="end-stars"></div>
+            <div id="endSessionMessage" class="end-message"></div>
+            <div class="end-actions">
+                <button id="retryWrongBtn" class="btn-secondary hidden">🔄 Nog even oefenen</button>
+                <button id="continueBtn" class="btn-primary">Doorgaan</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+    "name": "RekenTrainer",
+    "short_name": "RekenTrainer",
+    "description": "Leer rekenen op een leuke manier! Oefen tafels, optellen en aftrekken.",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#1e1b4b",
+    "theme_color": "#1e1b4b",
+    "categories": ["education", "games"],
+    "icons": [
+        {
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

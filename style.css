@@ -1,0 +1,1341 @@
+/* ===================
+   Base Styles
+   =================== */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: white;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+#app {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 16px;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.screen {
+    min-height: calc(100vh - 32px);
+    min-height: calc(100dvh - 32px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===================
+   Typography
+   =================== */
+h1 {
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #fff;
+}
+
+h3 {
+    font-size: 1rem;
+    margin: 0;
+    color: #fff;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 25px 0;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* ===================
+   Buttons
+   =================== */
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.1s, box-shadow 0.2s, background-color 0.2s;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    font-size: 1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.btn-link {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    padding: 15px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.btn-link:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-switch {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.btn-switch:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-back {
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: white;
+    font-weight: 500;
+}
+
+/* ===================
+   Profile Select Screen
+   =================== */
+#profileSelectScreen {
+    padding-top: 40px;
+    text-align: center;
+}
+
+.profile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-hint {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 12px 0;
+    font-size: 1rem;
+}
+
+.profile-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.profile-item:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+}
+
+.profile-avatar {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: #fff;
+}
+
+.profile-info {
+    flex: 1;
+    text-align: left;
+}
+
+.profile-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.profile-score {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 2px;
+}
+
+.name-input-section {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: white;
+    color: #1e1b4b;
+    outline: none;
+}
+
+input:focus {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+.no-profiles {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    padding: 20px;
+}
+
+/* ===================
+   Mode Select Screen
+   =================== */
+#modeSelectScreen {
+    padding-top: 10px;
+}
+
+.mode-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 10px 0;
+}
+
+.mode-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.mode-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.mode-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    text-align: left;
+    transition: background-color 0.2s, transform 0.1s;
+    color: white;
+}
+
+.mode-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+}
+
+.mode-btn:active {
+    transform: scale(0.98);
+}
+
+.mode-btn.adventure {
+    border-left: 4px solid #22c55e;
+}
+
+.mode-btn.skill {
+    border-left: 4px solid #8b5cf6;
+}
+
+.mode-btn.quick {
+    border-left: 4px solid #f59e0b;
+}
+
+.mode-icon {
+    font-size: 1.8rem;
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.mode-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.mode-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    display: block;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.mode-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    line-height: 1.4;
+}
+
+.mode-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 24px 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fbbf24;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 4px;
+}
+
+/* Profile switch section */
+.profile-switch-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-switch-user,
+.btn-new-user {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-switch-user:hover,
+.btn-new-user:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-switch-user span,
+.btn-new-user span {
+    font-size: 1.1rem;
+}
+
+/* ===================
+   Skill Select Screen
+   =================== */
+#skillSelectScreen {
+    padding-top: 10px;
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+.skill-header h2 {
+    flex: 1;
+    font-size: 1.3rem;
+}
+
+.skill-categories {
+    max-height: calc(100vh - 150px);
+    max-height: calc(100dvh - 150px);
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.skill-category {
+    margin-bottom: 24px;
+}
+
+.category-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    padding-left: 4px;
+}
+
+.skill-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.skill-item:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-1px);
+}
+
+.skill-item:active {
+    transform: scale(0.98);
+}
+
+.skill-icon {
+    font-size: 1.4rem;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.skill-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.skill-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.skill-level {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 2px;
+}
+
+.skill-stars {
+    font-size: 1rem;
+    color: #fbbf24;
+    letter-spacing: 2px;
+}
+
+/* ===================
+   Level Select Screen
+   =================== */
+#levelSelectScreen {
+    padding-top: 10px;
+}
+
+.level-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+.level-header h2 {
+    font-size: 1.3rem;
+}
+
+.level-list {
+    max-height: calc(100vh - 150px);
+    max-height: calc(100dvh - 150px);
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.phase-section {
+    margin-bottom: 24px;
+}
+
+.phase-title {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    padding-left: 4px;
+}
+
+.level-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.level-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.level-item:hover:not(.locked) {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-1px);
+}
+
+.level-item:active:not(.locked) {
+    transform: scale(0.98);
+}
+
+.level-item.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.level-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: #fff;
+}
+
+.level-item.locked .level-number {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.level-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.level-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.level-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 2px;
+}
+
+.level-stars {
+    font-size: 1rem;
+    color: #fbbf24;
+    letter-spacing: 2px;
+}
+
+.level-locked {
+    font-size: 1.2rem;
+}
+
+.level-mastery {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    min-width: 40px;
+    text-align: right;
+    font-weight: 500;
+}
+
+.btn-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.btn-timer .btn-icon {
+    font-size: 1.3rem;
+}
+
+/* ===================
+   Code Screen
+   =================== */
+.code-section {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.code-hint {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 15px 0;
+}
+
+textarea {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.9rem;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: white;
+    color: #1e1b4b;
+    resize: none;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #8b5cf6;
+}
+
+.code-display {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    border-radius: 12px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 0.75rem;
+    word-break: break-all;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    max-height: 100px;
+    overflow-y: auto;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.code-result {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.code-result:empty {
+    display: none;
+}
+
+.code-result.success {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+}
+
+.code-result.error {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+}
+
+/* ===================
+   Game Screen
+   =================== */
+#game {
+    padding-top: 10px;
+    text-align: center;
+}
+
+#topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+}
+
+#score {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+#levelTitle {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+
+#questionCount {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#timer {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+#timer.warning {
+    color: #ef4444;
+    animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Progress Bar */
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e, #4ade80);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Question Display */
+#question {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin: 15px 0;
+    padding: 15px;
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, color 0.2s;
+    color: #fff;
+}
+
+#question.correct {
+    color: #4ade80;
+    transform: scale(1.05);
+}
+
+#question.wrong {
+    color: #f87171;
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Hint Area */
+.hint-area {
+    background: rgba(251, 191, 36, 0.12);
+    border: 2px solid rgba(251, 191, 36, 0.4);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    text-align: left;
+    animation: fadeIn 0.3s ease;
+}
+
+.hint-area.hint-level-1 {
+    border-color: rgba(251, 191, 36, 0.4);
+}
+
+.hint-area.hint-level-2 {
+    border-color: rgba(251, 191, 36, 0.6);
+}
+
+.hint-area.hint-level-3 {
+    border-color: rgba(251, 191, 36, 0.8);
+}
+
+.hint-area.hint-level-4 {
+    border-color: #fbbf24;
+    background: rgba(251, 191, 36, 0.2);
+}
+
+.hint-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Answer Box */
+#answerBox {
+    font-size: 2.2rem;
+    font-weight: 600;
+    background: white;
+    color: #1e1b4b;
+    padding: 15px 20px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#answerBox.correct {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    transform: scale(1.05);
+}
+
+#answerBox.wrong {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    animation: shake 0.3s;
+}
+
+#answerBox.trying {
+    /* Gentle "oops" feedback - not aggressive */
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    animation: gentleShake 0.25s;
+}
+
+@keyframes gentleShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+#answerBox.showing-correct {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    font-size: 1.6rem;
+}
+
+#answerBox .correct-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-right: 8px;
+    font-weight: 400;
+}
+
+/* Feedback */
+.feedback {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 5rem;
+    opacity: 0;
+    transition: transform 0.2s, opacity 0.2s;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.feedback.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.feedback.correct {
+    color: #22c55e;
+    text-shadow: 0 0 30px rgba(34, 197, 94, 0.8);
+}
+
+.feedback.tryagain {
+    /* Subtle, non-punishing feedback */
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 3rem;
+    text-shadow: none;
+}
+
+.feedback.wrong {
+    /* Keep for backwards compatibility but make it gentler */
+    color: #fbbf24;
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+/* Keypad */
+#keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+#keypad button {
+    padding: 16px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+}
+
+#keypad .btn-hint {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    font-size: 1.3rem;
+}
+
+#keypad .btn-ok {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+/* Game Actions */
+.game-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-delete-wide {
+    flex: 1;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-weight: 500;
+}
+
+.btn-menu {
+    flex: 1;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-weight: 500;
+}
+
+/* ===================
+   Modal
+   =================== */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 200;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%);
+    border-radius: 20px;
+    padding: 32px 28px;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.end-stats {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.end-stats strong {
+    color: #4ade80;
+}
+
+.end-stars {
+    font-size: 2.5rem;
+    margin: 15px 0;
+    letter-spacing: 8px;
+}
+
+.end-message {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 20px;
+}
+
+.end-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.end-actions .btn-secondary {
+    margin-top: 0;
+}
+
+.end-actions .btn-primary {
+    margin-top: 0;
+}
+
+/* ===================
+   Responsive - Small phones
+   =================== */
+@media (max-height: 700px) {
+    #question {
+        font-size: 2.2rem;
+        margin: 8px 0;
+        min-height: 65px;
+    }
+    
+    #answerBox {
+        font-size: 1.8rem;
+        padding: 12px 15px;
+        min-height: 55px;
+    }
+    
+    #keypad button {
+        padding: 12px;
+        font-size: 1.3rem;
+    }
+    
+    .level-list,
+    .skill-categories {
+        max-height: calc(100vh - 130px);
+    }
+    
+    .hint-area {
+        padding: 10px 12px;
+    }
+    
+    .hint-text {
+        font-size: 0.85rem;
+    }
+}
+
+/* ===================
+   Responsive - Tablet (768px+)
+   =================== */
+@media (min-width: 550px) {
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    #app {
+        max-width: 480px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 24px;
+        min-height: auto;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        padding: 24px;
+    }
+    
+    .screen {
+        min-height: auto;
+    }
+    
+    .level-list,
+    .skill-categories {
+        max-height: 450px;
+    }
+    
+    .mode-btn {
+        padding: 20px 22px;
+    }
+    
+    #keypad button {
+        padding: 18px;
+        font-size: 1.6rem;
+    }
+    
+    #question {
+        font-size: 3rem;
+    }
+    
+    #answerBox {
+        font-size: 2.4rem;
+    }
+}
+
+/* ===================
+   Responsive - Tablet landscape / Small desktop (900px+)
+   =================== */
+@media (min-width: 900px) {
+    #app {
+        max-width: 520px;
+        padding: 28px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    h2 {
+        font-size: 1.6rem;
+    }
+    
+    .mode-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .mode-btn {
+        padding: 22px 24px;
+    }
+    
+    .mode-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 2rem;
+    }
+    
+    .mode-title {
+        font-size: 1.2rem;
+    }
+    
+    .mode-desc {
+        font-size: 0.95rem;
+    }
+    
+    .stat-value {
+        font-size: 2.5rem;
+    }
+    
+    .skill-item,
+    .level-item {
+        padding: 16px 18px;
+    }
+    
+    .profile-item {
+        padding: 18px 20px;
+    }
+    
+    #keypad button {
+        padding: 20px;
+        font-size: 1.7rem;
+        border-radius: 16px;
+    }
+    
+    #keypad {
+        gap: 10px;
+    }
+    
+    #question {
+        font-size: 3.2rem;
+        min-height: 100px;
+    }
+    
+    #answerBox {
+        font-size: 2.6rem;
+        min-height: 75px;
+        border-radius: 18px;
+    }
+    
+    .level-list,
+    .skill-categories {
+        max-height: 500px;
+    }
+}
+
+/* ===================
+   Responsive - Desktop (1200px+)
+   =================== */
+@media (min-width: 1200px) {
+    #app {
+        max-width: 560px;
+        padding: 32px;
+    }
+    
+    .mode-options {
+        gap: 14px;
+    }
+    
+    .skill-grid,
+    .level-grid {
+        gap: 10px;
+    }
+    
+    #keypad button {
+        padding: 22px;
+        font-size: 1.8rem;
+    }
+    
+    #question {
+        font-size: 3.5rem;
+    }
+    
+    #answerBox {
+        font-size: 2.8rem;
+    }
+    
+    .modal-content {
+        max-width: 420px;
+        padding: 36px 32px;
+    }
+}
+
+/* ===================
+   Hover states for desktop
+   =================== */
+@media (hover: hover) {
+    .profile-item:hover,
+    .mode-btn:hover,
+    .skill-item:hover,
+    .level-item:hover:not(.locked) {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    #keypad button:hover {
+        filter: brightness(1.1);
+        transform: translateY(-2px);
+    }
+    
+    .btn-primary:hover {
+        box-shadow: 0 6px 20px rgba(34, 197, 94, 0.5);
+        transform: translateY(-2px);
+    }
+    
+    .btn-timer:hover {
+        box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        transform: translateY(-2px);
+    }
+}
+
+/* ===================
+   Custom scrollbar
+   =================== */
+.level-list::-webkit-scrollbar,
+.skill-categories::-webkit-scrollbar {
+    width: 6px;
+}
+
+.level-list::-webkit-scrollbar-track,
+.skill-categories::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+}
+
+.level-list::-webkit-scrollbar-thumb,
+.skill-categories::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 3px;
+}
+
+.level-list::-webkit-scrollbar-thumb:hover,
+.skill-categories::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ===================
+   Focus states for accessibility
+   =================== */
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #8b5cf6;
+    outline-offset: 2px;
+}
+
+/* ===================
+   Print styles
+   =================== */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    #app {
+        box-shadow: none;
+    }
+}
