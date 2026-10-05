@@ -339,7 +339,7 @@ const LEVELS = [
     {
         id: 20,
         name: "Delen",
-        description: "? × 4 = 20",
+        description: "12 ÷ 3 en ? × 4 = 20",
         phase: 4,
         phaseName: "Tafels",
         generator: () => {
@@ -353,21 +353,88 @@ const LEVELS = [
             } else if (variant < 0.66) {
                 return { display: `${a} × ? = ${result}`, answer: b, type: 'missing_second' };
             } else {
-                return { display: `${result} ÷ ${b} = ?`, answer: a, type: 'standard' };
+                return { display: `${result} ÷ ${b}`, answer: a, type: 'standard' };
             }
         }
     },
     
-    // ========== FASE 5: Expert ==========
+    // ========== FASE 5: Delen ==========
     {
         id: 21,
+        name: "Delen 2, 5, 10",
+        description: "Makkelijk delen",
+        phase: 5,
+        phaseName: "Delen",
+        generator: () => {
+            const divisors = [2, 5, 10];
+            const b = divisors[random(0, 2)];
+            const a = random(1, 10);
+            const result = a * b;
+            return { display: `${result} ÷ ${b}`, answer: a, type: 'standard' };
+        }
+    },
+    {
+        id: 22,
+        name: "Delen 3, 4, 6",
+        description: "Delen met 3, 4 en 6",
+        phase: 5,
+        phaseName: "Delen",
+        generator: () => {
+            const divisors = [3, 4, 6];
+            const b = divisors[random(0, 2)];
+            const a = random(1, 10);
+            const result = a * b;
+            if (Math.random() < 0.3) {
+                return { display: `? × ${b} = ${result}`, answer: a, type: 'missing_first' };
+            }
+            return { display: `${result} ÷ ${b}`, answer: a, type: 'standard' };
+        }
+    },
+    {
+        id: 23,
+        name: "Delen 7, 8, 9",
+        description: "Moeilijker delen",
+        phase: 5,
+        phaseName: "Delen",
+        generator: () => {
+            const divisors = [7, 8, 9];
+            const b = divisors[random(0, 2)];
+            const a = random(1, 10);
+            const result = a * b;
+            return { display: `${result} ÷ ${b}`, answer: a, type: 'standard' };
+        }
+    },
+    {
+        id: 24,
+        name: "Delen mix",
+        description: "Alle deelsommen door elkaar",
+        phase: 5,
+        phaseName: "Delen",
+        generator: () => {
+            const b = random(2, 10);
+            const a = random(1, 10);
+            const result = a * b;
+            const variant = Math.random();
+            if (variant < 0.4) {
+                return { display: `${result} ÷ ${b}`, answer: a, type: 'standard' };
+            } else if (variant < 0.7) {
+                return { display: `${result} ÷ ? = ${a}`, answer: b, type: 'missing_second' };
+            } else {
+                return { display: `? × ${b} = ${result}`, answer: a, type: 'missing_first' };
+            }
+        }
+    },
+    
+    // ========== FASE 6: Expert ==========
+    {
+        id: 25,
         name: "Snelle mix",
         description: "Alles door elkaar!",
-        phase: 5,
+        phase: 6,
         phaseName: "Expert",
         generator: () => {
-            // Random niveau van 4 t/m 19
-            const level = LEVELS[random(3, 18)];
+            // Mix van niveau 4 t/m 24
+            const level = LEVELS[random(3, 23)];
             return level.generator();
         }
     }
@@ -396,7 +463,7 @@ function getPhases() {
         }
         phases[level.phase].levels.push(level);
     });
-    return Object.values(phases);
+    return Object.values(phases).sort((a, b) => a.id - b.id);
 }
 
 // Check if level is unlocked

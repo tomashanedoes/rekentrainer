@@ -173,6 +173,48 @@ const SKILLS = {
         levelRange: [5, 9, 14],
         difficulty: 2,
         generator: (skillLevel) => generateSplitting(skillLevel)
+    },
+    
+    // === Delen ===
+    divisionEasy: {
+        id: 'divisionEasy',
+        name: 'Delen 2, 5, 10',
+        icon: '➗',
+        category: 'division',
+        description: 'Sommen zoals 30 ÷ 5',
+        levelRange: [20, 21],
+        difficulty: 1,
+        generator: (skillLevel) => generateDivision([2, 5, 10], skillLevel, 'divisionEasy')
+    },
+    divisionMedium: {
+        id: 'divisionMedium',
+        name: 'Delen 3, 4, 6',
+        icon: '➗',
+        category: 'division',
+        description: 'Sommen zoals 24 ÷ 4',
+        levelRange: [22, 22],
+        difficulty: 2,
+        generator: (skillLevel) => generateDivision([3, 4, 6], skillLevel, 'divisionMedium')
+    },
+    divisionHard: {
+        id: 'divisionHard',
+        name: 'Delen 7, 8, 9',
+        icon: '➗',
+        category: 'division',
+        description: 'Sommen zoals 56 ÷ 7',
+        levelRange: [23, 23],
+        difficulty: 3,
+        generator: (skillLevel) => generateDivision([7, 8, 9], skillLevel, 'divisionHard')
+    },
+    divisionMix: {
+        id: 'divisionMix',
+        name: 'Delen mix',
+        icon: '🎯',
+        category: 'division',
+        description: 'Alle deelsommen door elkaar',
+        levelRange: [24, 24],
+        difficulty: 3,
+        generator: (skillLevel) => generateDivision([2, 3, 4, 5, 6, 7, 8, 9, 10], skillLevel, 'divisionMix')
     }
 };
 
@@ -181,6 +223,7 @@ const SKILL_CATEGORIES = [
     { id: 'addition', name: 'Optellen', icon: '➕' },
     { id: 'subtraction', name: 'Aftrekken', icon: '➖' },
     { id: 'multiplication', name: 'Tafels', icon: '✖️' },
+    { id: 'division', name: 'Delen', icon: '➗' },
     { id: 'splitting', name: 'Splitsen', icon: '❓' }
 ];
 
@@ -464,6 +507,47 @@ function generateSplitting(skillLevel) {
     }
 }
 
+function generateDivision(divisors, skillLevel, skillId) {
+    // Level 1: quotiënt 1-5
+    // Level 2-3: quotiënt 1-7
+    // Level 4-5: quotiënt 1-10 + soms ontbrekend getal
+    let maxQuotient = 5;
+    if (skillLevel >= 2) maxQuotient = 7;
+    if (skillLevel >= 3) maxQuotient = 10;
+    
+    const b = divisors[random(0, divisors.length - 1)];
+    const a = random(1, maxQuotient);
+    const result = a * b;
+    
+    if (skillLevel >= 4 && Math.random() < 0.35) {
+        const variant = Math.random();
+        if (variant < 0.5) {
+            return {
+                display: `? × ${b} = ${result}`,
+                answer: a,
+                type: 'missing_first',
+                skillId: skillId,
+                params: { a, b, result, op: '÷' }
+            };
+        }
+        return {
+            display: `${result} ÷ ? = ${a}`,
+            answer: b,
+            type: 'missing_second',
+            skillId: skillId,
+            params: { a, b, result, op: '÷' }
+        };
+    }
+    
+    return {
+        display: `${result} ÷ ${b}`,
+        answer: a,
+        type: 'standard',
+        skillId: skillId,
+        params: { a, b, result, op: '÷' }
+    };
+}
+
 // ===================
 // Hint Generators
 // ===================
@@ -512,6 +596,18 @@ const HINT_STRATEGIES = {
             return `Tel: ${steps.join(', ')}...`;
         },
         (q) => `Het antwoord is ${q.answer}. Onthoud: ${q.params.a} × ${q.params.b} = ${q.answer}`
+    ],
+    division: [
+        (q) => `Delen = omgekeerd van de tafel`,
+        (q) => {
+            const { a, b, result } = q.params;
+            return `${result} ÷ ${b}: hoeveel keer past ${b} in ${result}?`;
+        },
+        (q) => {
+            const { a, b, result } = q.params;
+            return `Denk aan de tafel: ${b} × ? = ${result}`;
+        },
+        (q) => `Het antwoord is ${q.answer}. Want ${q.params.b} × ${q.answer} = ${q.params.result}`
     ],
     splitting: [
         (q) => `Welk getal mist er om het totaal te maken?`,

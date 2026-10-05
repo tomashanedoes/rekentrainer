@@ -198,11 +198,14 @@
 
 </div>
 
-<script>
-    // Register service worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js');
-    }
-</script>
+<!-- Update banner (PWA nieuwe versie) -->
+<div id="updateBanner" class="update-banner hidden" role="status" aria-live="polite">
+    <div class="update-banner-text">
+        <strong>Nieuwe versie!</strong>
+        <span>Tik om te vernieuwen</span>
+    </div>
+    <button id="updateBannerBtn" class="update-banner-btn" type="button">Vernieuwen</button>
+</div>
+
 </body>
 </html>

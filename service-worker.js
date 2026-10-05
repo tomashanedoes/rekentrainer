@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rekentrainer-v11';
+const CACHE_NAME = 'rekentrainer-v13';
 const FILES_TO_CACHE = [
     './',
     './index.html',
@@ -13,6 +13,7 @@ const FILES_TO_CACHE = [
 ];
 
 // Install event - cache all static assets
+// Activeer niet meteen: de app toont eerst een updatebanner
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -20,11 +21,10 @@ self.addEventListener('install', (event) => {
                 console.log('Caching app shell');
                 return cache.addAll(FILES_TO_CACHE);
             })
-            .then(() => self.skipWaiting())
     );
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches and take control
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((keyList) => {
@@ -36,6 +36,13 @@ self.addEventListener('activate', (event) => {
             }));
         }).then(() => self.clients.claim())
     );
+});
+
+// App vraagt expliciet om de nieuwe versie te activeren
+self.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'SKIP_WAITING') {
+        self.skipWaiting();
+    }
 });
 
 // Fetch event - serve from cache, fallback to network

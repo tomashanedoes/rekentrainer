@@ -551,7 +551,7 @@ function startQuickMode() {
     state.timerMode = true;
     
     // Start with mix level
-    const question = PracticeEngine.startSession('adventure', { levelId: 21 });
+    const question = PracticeEngine.startSession('adventure', { levelId: 25 });
     
     resetGameState();
     showGame();
@@ -1153,10 +1153,85 @@ function setupEventListeners() {
 }
 
 // ===================
+// PWA Update Prompt
+// ===================
+let updateRegistration = null;
+let refreshingForUpdate = false;
+
+function showUpdateBanner(registration) {
+    updateRegistration = registration;
+    const banner = $('updateBanner');
+    if (banner) banner.classList.remove('hidden');
+}
+
+function hideUpdateBanner() {
+    const banner = $('updateBanner');
+    if (banner) banner.classList.add('hidden');
+}
+
+function applyWaitingUpdate() {
+    if (!updateRegistration || !updateRegistration.waiting) return;
+    updateRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
+}
+
+function trackWaitingWorker(registration, worker) {
+    if (!worker) return;
+    
+    worker.addEventListener('statechange', () => {
+        // Alleen tonen bij een update (er is al een actieve controller)
+        if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+            showUpdateBanner(registration);
+        }
+    });
+}
+
+function setupServiceWorkerUpdates() {
+    if (!('serviceWorker' in navigator)) return;
+    
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (refreshingForUpdate) return;
+        refreshingForUpdate = true;
+        window.location.reload();
+    });
+    
+    navigator.serviceWorker.register('./service-worker.js')
+        .then((registration) => {
+            if (registration.waiting && navigator.serviceWorker.controller) {
+                showUpdateBanner(registration);
+            }
+            
+            registration.addEventListener('updatefound', () => {
+                trackWaitingWorker(registration, registration.installing);
+            });
+            
+            // Periodiek checken op nieuwe versie (ook bij open PWA)
+            setInterval(() => {
+                registration.update().catch(() => {});
+            }, 60 * 60 * 1000);
+            
+            // Extra check bij terugkomen naar de app
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible') {
+                    registration.update().catch(() => {});
+                }
+            });
+        })
+        .catch((err) => {
+            console.warn('Service worker registratie mislukt:', err);
+        });
+    
+    const updateBtn = $('updateBannerBtn');
+    if (updateBtn) {
+        updateBtn.addEventListener('click', applyWaitingUpdate);
+    }
+}
+
+// ===================
 // Initialization
 // ===================
 function init() {
     setupEventListeners();
+    setupServiceWorkerUpdates();
     loadProfiles();
     
     const profileCount = Object.keys(state.profiles).length;

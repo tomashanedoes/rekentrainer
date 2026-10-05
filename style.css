@@ -34,6 +34,65 @@ body {
 }
 
 /* ===================
+   Update Banner (PWA)
+   =================== */
+.update-banner {
+    position: fixed;
+    left: 50%;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    transform: translateX(-50%);
+    width: min(440px, calc(100% - 24px));
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #fef3c7;
+    color: #1e1b4b;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    animation: updateBannerIn 0.35s ease-out;
+}
+
+.update-banner.hidden {
+    display: none !important;
+}
+
+.update-banner-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.95rem;
+    line-height: 1.25;
+}
+
+.update-banner-text strong {
+    font-size: 1rem;
+}
+
+.update-banner-btn {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #1e1b4b;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+@keyframes updateBannerIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* ===================
    Typography
    =================== */
 h1 {
